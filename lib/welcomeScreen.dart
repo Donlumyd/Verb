@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:voxpopper/loginScreen.dart';
+import 'package:voxpopper/reusableroundedbutton.dart';
+import 'package:voxpopper/registrationScreen.dart';
 
 class WelcomeScreen extends StatefulWidget {
 
@@ -13,7 +16,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome'),
+        title: Text('Welcome'
+        ),
         backgroundColor: Colors.lightBlue[800],
       ),
 
@@ -24,66 +28,48 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
 
             children: [
-              Image.asset(null),
+             // Image.asset(null), //add image asset later
 
-              Text(
+              Center (
+
+             child: Text(
                 'Verb',
                     style: TextStyle(
                       fontSize: 45,
                       fontWeight: FontWeight.w900,
+                      color: Colors.lightBlue[800],
+                      fontFamily: 'Calibri',
                     ),
+
+              ),
               ),
 
               Expanded(
-                flex: 1,
                 child:
-          Text(' Generate useful public opinions, reviews and suggestions',
+          Text(' Generate useful public opinions, reviews, suggestions and brand perception with Verb',
+
+              textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 15.0,
-                    fontWeight: FontWeight.w900,
+                fontFamily: 'Sans serif',
+                fontSize: 18.0,
+                    fontWeight: FontWeight.w300,
+                color: Colors.lightBlue[800],
               ),
           ),
               ),
 
               SizedBox(
-                height: 48.0,
-              ),
-              
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 16.0),
-                child: Material(
-                  elevation: 5.0,
-                    color: Colors.blueAccent,
-                  borderRadius: BorderRadius.circular(30.0),
-                  child: MaterialButton(
-                    onPressed: (){
-                      // go to login screen
-                    },
-                    minWidth: 200.0,
-                    height: 42.0,
-                    child: Text(
-                    'Login'
-                    ),
-                ),
-                ),
+                height: 20.0,
               ),
 
-              Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                child: Material(
-                  color: Colors.blueAccent,
-                  borderRadius: BorderRadius.circular(30.0),
-                  elevation: 5.0,
+              ReusableRoundedButton(buttonText: 'Log in', colour: Colors.lightBlueAccent, onPressed: (){
+                Navigator.pushNamed(context, LoginScreen.id);
+              }),
 
-                  child: MaterialButton(onPressed:(){
 
-                  },
-                    minWidth: 200.0,
-                    height: 42.0,
-                    child: Text('Register'),
-                  ),
-                ),
-              ),
+              ReusableRoundedButton(buttonText: 'Register', colour: Colors.lightBlue, onPressed: (){
+                Navigator.pushNamed(context, RegistrationScreen.id);
+              },),
             ],
 
           ),

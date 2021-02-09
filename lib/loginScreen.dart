@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:voxpopper/reusableroundedbutton.dart';
+import 'package:voxpopper/reusabletextfield.dart';
 
 class LoginScreen extends StatefulWidget {
 
@@ -24,15 +26,20 @@ class _LoginScreenState extends State<LoginScreen> {
                children: [
                  Container(
                    height: 200.0,
-                   child: Image.asset(null), //add image asset later
+                   //child: Image.asset(null), //add image asset later
                  ),
 
                  SizedBox(
                    height: 48.0,
-                 )
+                 ),
 
-                // add TextField(),
+                ReusableTextField(),
 
+                 ReusableTextField(),
+
+                 ReusableRoundedButton(buttonText: 'Login', colour: Colors.blueAccent, onPressed: (){
+                  // Navigator.pushNamed((context), Homepage.id )
+                 },),
                ],
              ),
                )
