@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:voxpopper/loginScreen.dart';
 import 'package:voxpopper/reusableroundedbutton.dart';
-import 'package:voxpopper/registrationScreen.dart';
+import 'package:voxpopper/accountchooser.dart';
+
 
 class WelcomeScreen extends StatefulWidget {
 
@@ -68,7 +69,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
 
               ReusableRoundedButton(buttonText: 'Register', colour: Colors.lightBlue, onPressed: (){
-                Navigator.pushNamed(context, RegistrationScreen.id);
+                Navigator.pushNamed(context, AccountChooser.id);
               },),
             ],
 

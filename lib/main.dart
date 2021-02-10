@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:voxpopper/loginScreen.dart';
 import 'package:voxpopper/registrationScreen.dart';
 import 'package:voxpopper/welcomeScreen.dart';
+import 'package:voxpopper/accountchooser.dart';
 
  void main (){
    runApp(
@@ -29,6 +30,7 @@ import 'package:voxpopper/welcomeScreen.dart';
        WelcomeScreen.id: (context) => WelcomeScreen(),
          LoginScreen.id: (context) => LoginScreen(),
          RegistrationScreen.id: (context) => RegistrationScreen(),
+         AccountChooser.id: (context) => AccountChooser(),
 
        },
      );
