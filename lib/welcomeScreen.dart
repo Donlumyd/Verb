@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:voxpopper/loginScreen.dart';
 import 'package:voxpopper/reusableroundedbutton.dart';
-import 'package:voxpopper/accountchooser.dart';
+import 'package:voxpopper/accountChooser.dart';
 
 
 class WelcomeScreen extends StatefulWidget {

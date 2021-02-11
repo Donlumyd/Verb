@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/registrationScreen.dart';
+import 'package:voxpopper/registrationScreen.dart';
 
  class AccountChooser extends StatelessWidget{
 
    static String id ='accountChooser';
+   final bool corporate = true;
 
    @override
    Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ import 'package:flutter/registrationScreen.dart';
 
            child: MaterialButton(
              onPressed: (){
-             //  Navigator.pushNamed(context, RegistrationScreen.id);
+              Navigator.pushNamed(context, RegistrationScreen.id, arguments: corporate );
 
              },
              minWidth: 200.0,
@@ -55,7 +56,7 @@ import 'package:flutter/registrationScreen.dart';
 
                    child: MaterialButton(
                      onPressed: (){
-               //         Navigator.pushNamed(context, RegistrationScreen.id);
+                       Navigator.pushNamed(context, RegistrationScreen.id, arguments: corporate);
                      },
                      minWidth: 200.0,
                      height: 42.0,

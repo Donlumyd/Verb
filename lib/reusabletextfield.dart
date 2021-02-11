@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
 
 class ReusableTextField extends StatefulWidget {
+
+  ReusableTextField({ @required this.hintOfTextField });
+
   @override
   _ReusableTextFieldState createState() => _ReusableTextFieldState();
+
+ final String hintOfTextField;
+
+  String get hint {
+    return hintOfTextField;
+}
+
 
 
 }
 
 class _ReusableTextFieldState extends State<ReusableTextField> {
+
+  ReusableTextField reusableTextField = ReusableTextField();
+
   @override
   Widget build(BuildContext context) {
 
@@ -17,7 +30,7 @@ class _ReusableTextFieldState extends State<ReusableTextField> {
 
         },
         decoration: InputDecoration(
-          hintText: 'Username or Email',
+          hintText: reusableTextField.hint,
           contentPadding:
           EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
           border: OutlineInputBorder(
