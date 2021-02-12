@@ -16,31 +16,36 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(
        title: Text('Login'),
+        backgroundColor: Colors.blue,
       ),
            body: Padding(
                padding: EdgeInsets.symmetric(vertical: 24.0),
-             child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+             child: Center(
+               child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
 
-               children: [
-                 Container(
-                   height: 200.0,
-                   //child: Image.asset(null), //add image asset later
-                 ),
+                 children: [
+                   Container(
+                     height: 100.0,
+                     //child: Image.asset(null), //add image asset later
+                   ),
 
-                 SizedBox(
-                   height: 48.0,
-                 ),
+                   SizedBox(
+                     height: 48.0,
+                   ),
 
-                ReusableTextField(),
+                  ReusableTextField(hintOfTextField: 'Username or E-mail'),
 
-                 ReusableTextField(),
+                   SizedBox(height: 5),
 
-                 ReusableRoundedButton(buttonText: 'Login', colour: Colors.blueAccent, onPressed: (){
-                  // Navigator.pushNamed((context), Homepage.id )
-                 },),
-               ],
+                   ReusableTextField(hintOfTextField: 'Password'),
+
+                   ReusableRoundedButton(buttonText: 'Login', colour: Colors.blueAccent, onPressed: (){
+                    // Navigator.pushNamed((context), Homepage.id )
+                   },),
+                 ],
+               ),
              ),
                )
 

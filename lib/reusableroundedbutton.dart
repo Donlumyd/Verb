@@ -13,7 +13,7 @@ class ReusableRoundedButton extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Padding(padding:
-    EdgeInsets.symmetric(vertical: 16),
+    EdgeInsets.symmetric(vertical: 16, horizontal: 15),
     child: Material(
     color: colour,
     borderRadius: BorderRadius.circular(30.0),

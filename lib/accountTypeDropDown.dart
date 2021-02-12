@@ -1,4 +1,6 @@
 
+import 'package:flutter/material.dart';
+
 const  List<String> corporateAccountType = [
   'Government/Public Office',
   'Product/Service',
@@ -10,9 +12,3 @@ const  List<String> corporateAccountType = [
 
 ];
 
-void getDropDownItems(){
-
-  for ( String menuItem in corporateAccountType){
-
-  }
-}

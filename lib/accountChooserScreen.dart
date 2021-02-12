@@ -31,7 +31,7 @@ import 'package:voxpopper/registrationScreen.dart';
            EdgeInsets.symmetric(vertical: 16),
 
          child: Material(
-           color: Colors.blueAccent,
+           color: Colors.lightBlueAccent,
            elevation: 5.0,
 
            child: MaterialButton(
@@ -51,7 +51,7 @@ import 'package:voxpopper/registrationScreen.dart';
                EdgeInsets.symmetric(vertical: 16),
 
                  child: Material(
-                   color: Colors.lightBlueAccent,
+                   color: Colors.lightBlue,
                    elevation: 5.0,
 
                    child: MaterialButton(

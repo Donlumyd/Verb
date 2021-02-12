@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:voxpopper/loginScreen.dart';
 import 'package:voxpopper/reusableroundedbutton.dart';
-import 'package:voxpopper/accountChooser.dart';
+import 'package:voxpopper/accountChooserScreen.dart';
 
 
 class WelcomeScreen extends StatefulWidget {
@@ -19,7 +19,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       appBar: AppBar(
         title: Text('Welcome'
         ),
-        backgroundColor: Colors.lightBlue[800],
+        backgroundColor: Colors.blue
       ),
 
         body: Padding(

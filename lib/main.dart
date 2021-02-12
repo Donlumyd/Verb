@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:voxpopper/loginScreen.dart';
 import 'package:voxpopper/registrationScreen.dart';
 import 'package:voxpopper/welcomeScreen.dart';
-import 'package:voxpopper/accountChooser.dart';
+import 'package:voxpopper/accountChooserScreen.dart';
 
  void main (){
    runApp(
