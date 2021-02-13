@@ -29,7 +29,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return dropdownItems;
   }
 
-  
     @override
     Widget build(BuildContext context) {
     return Scaffold(
