@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "495135468385",
+    "project_id": "verb-5f83f",
+    "storage_bucket": "verb-5f83f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495135468385:android:cab71f665926322862b320",
+        "android_client_info": {
+          "package_name": "com.donlumyd_Inc.voxpopper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495135468385-tiakf6j5dcagtsqen1a0n40aoe38k1jj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGuGu4GDv4Y_vrVc7nWVIzNh1sH-XhPYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "495135468385-tiakf6j5dcagtsqen1a0n40aoe38k1jj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

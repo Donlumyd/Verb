@@ -14,7 +14,7 @@ class RegistrationScreen extends StatefulWidget {
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
 
-  String selectedMenu = 'Firm';
+  String selectedMenu = 'Specify Business Type';
   List <DropdownMenuItem>getDropDownItems() {
     List<DropdownMenuItem<String>>dropdownItems = [];
 
@@ -29,6 +29,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return dropdownItems;
   }
 
+  
     @override
     Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +73,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     ReusableTextField(hintOfTextField: 'Password'),
       SizedBox(height: 5),
 
-      ReusableRoundedButton(buttonText: 'Register', onPressed: null)
+      ReusableRoundedButton(buttonText: 'Register', colour: Colors.lightBlueAccent, onPressed: null)
 
 
       //ReusableRoundedButton(onPressed: null)
