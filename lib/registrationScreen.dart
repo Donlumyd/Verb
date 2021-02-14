@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:voxpopper/reusableroundedbutton.dart';
 import 'package:voxpopper/reusabletextfield.dart';
 import 'accountTypeDropDown.dart';
+import 'dart:io' show Platform;
 
 class RegistrationScreen extends StatefulWidget {
 
@@ -15,8 +17,10 @@ class RegistrationScreen extends StatefulWidget {
 class _RegistrationScreenState extends State<RegistrationScreen> {
 
   String selectedMenu = 'Specify Business Type';
-  List <DropdownMenuItem>getDropDownItems() {
-    List<DropdownMenuItem<String>>dropdownItems = [];
+
+  DropdownButton<String>getDropDownButton(){
+
+    List<DropdownMenuItem<String>>dropdownItems= [];
 
     for (String menuItem in corporateAccountType) {
       var newItem = DropdownMenuItem(
@@ -26,8 +30,31 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       dropdownItems.add(newItem);
     }
 
-    return dropdownItems;
+    DropdownButton<String>(value: selectedMenu,
+        items: dropdownItems,
+        onChanged: (value){
+setState((){selectedMenu = value;
+},);
+},);
+
   }
+
+  CupertinoPicker iOSPicker(){
+
+    List<Text>itemsPicker = [];
+    for (String menuItem in corporateAccountType){
+
+      itemsPicker.add(Text(menuItem));
+    }
+
+   return CupertinoPicker(itemExtent: 32.0,
+       onSelectedItemChanged: (selectedMenu){},
+       children: itemsPicker
+  );
+
+  }
+
+
 
     @override
     Widget build(BuildContext context) {
@@ -50,14 +77,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     Padding(
       padding: const EdgeInsets.only(left: 20, right: 20),
-      child: DropdownButton<String>(
-        value: selectedMenu,
-        items: getDropDownItems(),
-        onChanged: (value){
-          setState((){
-          selectedMenu = value;
-          });
-        }),
+      child: Platform.isIOS ? iOSPicker() : getDropDownButton(),
     ),
 
     ReusableTextField(hintOfTextField: 'Username'),
@@ -75,7 +95,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ReusableRoundedButton(buttonText: 'Register', colour: Colors.lightBlueAccent, onPressed: null)
 
 
-      //ReusableRoundedButton(onPressed: null)
+
 
 
     ],
