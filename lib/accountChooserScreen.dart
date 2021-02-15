@@ -5,7 +5,6 @@ import 'package:voxpopper/registrationScreen.dart';
  class AccountChooser extends StatelessWidget{
 
    static String id ='accountChooser';
-   final bool corporate = true;
 
    @override
    Widget build(BuildContext context) {
@@ -36,7 +35,7 @@ import 'package:voxpopper/registrationScreen.dart';
 
            child: MaterialButton(
              onPressed: (){
-              Navigator.pushNamed(context, RegistrationScreen.id, arguments: corporate );
+                Navigator.pushNamed(context, RegistrationScreen.id, arguments: true );
 
              },
              minWidth: 200.0,
@@ -56,7 +55,7 @@ import 'package:voxpopper/registrationScreen.dart';
 
                    child: MaterialButton(
                      onPressed: (){
-                       Navigator.pushNamed(context, RegistrationScreen.id, arguments: corporate);
+                       Navigator.pushNamed(context, RegistrationScreen.id, arguments: false);
                      },
                      minWidth: 200.0,
                      height: 42.0,

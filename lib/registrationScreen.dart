@@ -5,9 +5,10 @@ import 'package:voxpopper/reusabletextfield.dart';
 import 'accountTypeDropDown.dart';
 import 'dart:io' show Platform;
 
-class RegistrationScreen extends StatefulWidget {
+class RegistrationScreen extends StatefulWidget{
 
   static String id = 'registrationScreen';
+
 
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
@@ -30,7 +31,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       dropdownItems.add(newItem);
     }
 
-    DropdownButton<String>(value: selectedMenu,
+    return DropdownButton<String>(value: selectedMenu,
         items: dropdownItems,
         onChanged: (value){
 setState((){selectedMenu = value;
@@ -58,6 +59,9 @@ setState((){selectedMenu = value;
 
     @override
     Widget build(BuildContext context) {
+
+      final controlData = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
     appBar: AppBar(
     title:
@@ -75,9 +79,12 @@ setState((){selectedMenu = value;
     children: [
     // add Image.asset() later
 
-    Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20),
-      child: Platform.isIOS ? iOSPicker() : getDropDownButton(),
+    Visibility(
+      visible: controlData,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Platform.isIOS ? iOSPicker() : getDropDownButton(),
+      ),
     ),
 
     ReusableTextField(hintOfTextField: 'Username'),
