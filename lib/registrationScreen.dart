@@ -8,7 +8,31 @@ import 'dart:io' show Platform;
 class RegistrationScreen extends StatefulWidget{
 
   static String id = 'registrationScreen';
+  String username;
+  String email;
+  String phoneNumber;
+  String password;
+  String corporateType;
 
+  void setUsername(String username){
+    this.username = username;
+  }
+
+  void setEmail(String email){
+    this.email = email;
+  }
+
+  void setPhoneNumber(String phoneNumber){
+    this.phoneNumber = phoneNumber;
+  }
+
+  void setPassword(String password){
+    this.password = password;
+  }
+
+  void setcorporateType(String corporateType){
+    this.corporateType = corporateType;
+  }
 
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
@@ -16,6 +40,8 @@ class RegistrationScreen extends StatefulWidget{
 
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+
+  RegistrationScreen regScreen = new RegistrationScreen();
 
   String selectedMenu = 'Specify Business Type';
 
@@ -87,16 +113,24 @@ setState((){selectedMenu = value;
       ),
     ),
 
-    ReusableTextField(hintOfTextField: 'Username'),
+    ReusableTextField(hintOfTextField: 'Username', onChangedValue:(value){
+      regScreen.setUsername(value);
+    },),
     SizedBox(height: 5),
 
-    ReusableTextField(hintOfTextField: 'E-mail'),
+    ReusableTextField(hintOfTextField: 'E-mail', onChangedValue: (value){
+      regScreen.setEmail(value);
+    },),
       SizedBox(height: 5),
 
-    ReusableTextField(hintOfTextField: 'Phone Number'),
+    ReusableTextField(hintOfTextField: 'Phone Number', onChangedValue: (value){
+      regScreen.setPhoneNumber(value);
+    },),
       SizedBox(height: 5),
 
-    ReusableTextField(hintOfTextField: 'Password'),
+    ReusableTextField(hintOfTextField: 'Password' , hidePassword: true, onChangedValue: (value){
+      regScreen.setPassword(value);
+    },),
       SizedBox(height: 5),
 
       ReusableRoundedButton(buttonText: 'Register', colour: Colors.lightBlueAccent, onPressed: null)

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class ReusableTextField extends StatelessWidget {
 
-  ReusableTextField({ this.hintOfTextField });
+  ReusableTextField({ this.hintOfTextField, this.hidePassword, @required this.onChangedValue});
 
  final String hintOfTextField;
+ final Function onChangedValue;
+ final bool hidePassword;
 
 
   @override
@@ -14,10 +16,9 @@ class ReusableTextField extends StatelessWidget {
       padding: EdgeInsets.only(left: 15.0, right: 15.0),
 
       child: TextField(
-          onChanged: (value)
-          {
-
-          },
+        textAlign: TextAlign.center,
+          obscureText: hidePassword,
+          onChanged: onChangedValue,
           decoration: InputDecoration(
             hintText: hintOfTextField,
             contentPadding:

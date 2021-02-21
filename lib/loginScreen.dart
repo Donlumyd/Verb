@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                    SizedBox(height: 5),
 
-                   ReusableTextField(hintOfTextField: 'Password'),
+                   ReusableTextField(hintOfTextField: 'Password' , hidePassword: true),
 
                    ReusableRoundedButton(buttonText: 'Login', colour: Colors.blueAccent, onPressed: (){
                     // Navigator.pushNamed((context), Homepage.id )
