@@ -3,36 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:voxpopper/reusableroundedbutton.dart';
 import 'package:voxpopper/reusabletextfield.dart';
 import 'accountTypeDropDown.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:voxpopper/homePage.dart';
 import 'dart:io' show Platform;
 
 class RegistrationScreen extends StatefulWidget{
 
   static String id = 'registrationScreen';
-  String username;
-  String email;
-  String phoneNumber;
-  String password;
-  String corporateType;
 
-  void setUsername(String username){
-    this.username = username;
-  }
-
-  void setEmail(String email){
-    this.email = email;
-  }
-
-  void setPhoneNumber(String phoneNumber){
-    this.phoneNumber = phoneNumber;
-  }
-
-  void setPassword(String password){
-    this.password = password;
-  }
-
-  void setcorporateType(String corporateType){
-    this.corporateType = corporateType;
-  }
 
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
@@ -41,9 +19,15 @@ class RegistrationScreen extends StatefulWidget{
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
 
-  RegistrationScreen regScreen = new RegistrationScreen();
+  final _auth = FirebaseAuth.instance;
 
   String selectedMenu = 'Specify Business Type';
+  String username;
+  String email;
+  String phoneNumber;
+  String password;
+  String corporateType;
+
 
   DropdownButton<String>getDropDownButton(){
 
@@ -66,6 +50,7 @@ setState((){selectedMenu = value;
 
   }
 
+
   CupertinoPicker iOSPicker(){
 
     List<Text>itemsPicker = [];
@@ -82,11 +67,14 @@ setState((){selectedMenu = value;
   }
 
 
-
     @override
     Widget build(BuildContext context) {
 
       final controlData = ModalRoute.of(context).settings.arguments;
+
+          if (controlData == true){
+      corporateType =selectedMenu;
+          }
 
     return Scaffold(
     appBar: AppBar(
@@ -113,27 +101,49 @@ setState((){selectedMenu = value;
       ),
     ),
 
-    ReusableTextField(hintOfTextField: 'Username', onChangedValue:(value){
-      regScreen.setUsername(value);
+    ReusableTextField(hintOfTextField: 'Username', hidePassword: false, onChangedValue:(value){
+      username = value;
     },),
+
     SizedBox(height: 5),
 
-    ReusableTextField(hintOfTextField: 'E-mail', onChangedValue: (value){
-      regScreen.setEmail(value);
+    ReusableTextField(hintOfTextField: 'E-mail', hidePassword: false, keyType: TextInputType.emailAddress, onChangedValue: (value){
+      email = value;
     },),
+
       SizedBox(height: 5),
 
-    ReusableTextField(hintOfTextField: 'Phone Number', onChangedValue: (value){
-      regScreen.setPhoneNumber(value);
+    ReusableTextField(hintOfTextField: 'Phone Number', hidePassword: false, keyType: TextInputType.phone, onChangedValue: (value){
+      phoneNumber = value;
     },),
+
       SizedBox(height: 5),
 
-    ReusableTextField(hintOfTextField: 'Password' , hidePassword: true, onChangedValue: (value){
-      regScreen.setPassword(value);
+    ReusableTextField(hintOfTextField: 'Password', hidePassword: true, onChangedValue: (value){
+      password = value;
     },),
+
       SizedBox(height: 5),
 
-      ReusableRoundedButton(buttonText: 'Register', colour: Colors.lightBlueAccent, onPressed: null)
+      ReusableRoundedButton(buttonText: 'Register', colour: Colors.lightBlueAccent, onPressed: () async {
+
+        try {
+          final newUser = await _auth.createUserWithEmailAndPassword(
+              email: email, password: password). then((value) async{
+                 var userUpdateInfo = new UserUpdateInfo();
+                 userUpdateInfo.displayName = username;
+          });
+
+          if (newUser != null)
+            {
+              Navigator.pushNamed(context, HomePage.id);
+            }
+        }
+        catch(e){
+          print(e);
+        }
+      },
+      ),
 
 
 

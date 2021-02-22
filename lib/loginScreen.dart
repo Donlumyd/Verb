@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:voxpopper/reusableroundedbutton.dart';
 import 'package:voxpopper/reusabletextfield.dart';
@@ -35,11 +36,15 @@ class _LoginScreenState extends State<LoginScreen> {
                      height: 48.0,
                    ),
 
-                  ReusableTextField(hintOfTextField: 'Username or E-mail'),
+                  ReusableTextField(hintOfTextField: 'Username or E-mail', hidePassword: false, onChangedValue: (value){
+
+                  },),
 
                    SizedBox(height: 5),
 
-                   ReusableTextField(hintOfTextField: 'Password' , hidePassword: true),
+                   ReusableTextField(hintOfTextField: 'Password' , hidePassword: true, onChangedValue: (value){
+
+                   },),
 
                    ReusableRoundedButton(buttonText: 'Login', colour: Colors.blueAccent, onPressed: (){
                     // Navigator.pushNamed((context), Homepage.id )
