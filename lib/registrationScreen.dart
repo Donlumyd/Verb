@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:voxpopper/reusableroundedbutton.dart';
@@ -130,8 +131,14 @@ setState((){selectedMenu = value;
         try {
           final newUser = await _auth.createUserWithEmailAndPassword(
               email: email, password: password). then((value) async{
-                 var userUpdateInfo = new UserUpdateInfo();
-                 userUpdateInfo.displayName = username;
+
+                 firebase.database().ref().child(value.user.uid).set({
+                   'email': email,
+                   'password': password,
+                   'displayName': username,
+                   'phoneNumber': phoneNumber,
+                   'accountType': corporateType,
+                 });
           });
 
           if (newUser != null)
