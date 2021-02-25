@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:voxpopper/homePage.dart';
 import 'package:voxpopper/loginScreen.dart';
 import 'package:voxpopper/registrationScreen.dart';
 import 'package:voxpopper/welcomeScreen.dart';
 import 'package:voxpopper/accountChooserScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
- void main (){
+ void main () async{
+     WidgetsFlutterBinding.ensureInitialized();
+     await Firebase.initializeApp();
    runApp(
        Verb(
    ),
@@ -31,6 +35,7 @@ import 'package:voxpopper/accountChooserScreen.dart';
          LoginScreen.id: (context) => LoginScreen(),
          RegistrationScreen.id: (context) => RegistrationScreen(),
          AccountChooser.id: (context) => AccountChooser(),
+         HomePage.id: (context) => HomePage(),
 
        },
      );

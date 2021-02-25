@@ -1,4 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:voxpopper/reusableroundedbutton.dart';
@@ -6,6 +6,7 @@ import 'package:voxpopper/reusabletextfield.dart';
 import 'accountTypeDropDown.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:voxpopper/homePage.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'dart:io' show Platform;
 
 class RegistrationScreen extends StatefulWidget{
@@ -28,7 +29,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   String phoneNumber;
   String password;
   String corporateType;
-
+  bool showSpinner = false;
 
   DropdownButton<String>getDropDownButton(){
 
@@ -84,82 +85,92 @@ setState((){selectedMenu = value;
     backgroundColor: Colors.blue,
     ),
 
-    body: Padding(
-    padding: EdgeInsets.symmetric(horizontal: 2),
+    body: ModalProgressHUD(
+        inAsyncCall: showSpinner,
 
-    child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-
-    children: [
-    // add Image.asset() later
-
-    Visibility(
-      visible: controlData,
       child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        child: Platform.isIOS ? iOSPicker() : getDropDownButton(),
+      padding: EdgeInsets.symmetric(horizontal: 2),
+
+      child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+
+      children: [
+      // add Image.asset() later
+
+      Visibility(
+        visible: controlData,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20),
+          child: Platform.isIOS ? iOSPicker() : getDropDownButton(),
+        ),
       ),
-    ),
 
-    ReusableTextField(hintOfTextField: 'Username', hidePassword: false, onChangedValue:(value){
-      username = value;
-    },),
-
-    SizedBox(height: 5),
-
-    ReusableTextField(hintOfTextField: 'E-mail', hidePassword: false, keyType: TextInputType.emailAddress, onChangedValue: (value){
-      email = value;
-    },),
+      ReusableTextField(hintOfTextField: 'Username', hidePassword: false, onChangedValue:(value){
+        username = value;
+      },),
 
       SizedBox(height: 5),
 
-    ReusableTextField(hintOfTextField: 'Phone Number', hidePassword: false, keyType: TextInputType.phone, onChangedValue: (value){
-      phoneNumber = value;
-    },),
+      ReusableTextField(hintOfTextField: 'E-mail', hidePassword: false, keyType: TextInputType.emailAddress, onChangedValue: (value){
+        email = value;
+      },),
 
-      SizedBox(height: 5),
+        SizedBox(height: 5),
 
-    ReusableTextField(hintOfTextField: 'Password', hidePassword: true, onChangedValue: (value){
-      password = value;
-    },),
+      ReusableTextField(hintOfTextField: 'Phone Number', hidePassword: false, keyType: TextInputType.phone, onChangedValue: (value){
+        phoneNumber = value;
+      },),
 
-      SizedBox(height: 5),
+        SizedBox(height: 5),
 
-      ReusableRoundedButton(buttonText: 'Register', colour: Colors.lightBlueAccent, onPressed: () async {
+      ReusableTextField(hintOfTextField: 'Password', hidePassword: true, onChangedValue: (value){
+        password = value;
+      },),
 
-        try {
-          final newUser = await _auth.createUserWithEmailAndPassword(
-              email: email, password: password). then((value) async{
+        SizedBox(height: 5),
 
-                 firebase.database().ref().child(value.user.uid).set({
-                   'email': email,
-                   'password': password,
-                   'displayName': username,
-                   'phoneNumber': phoneNumber,
-                   'accountType': corporateType,
-                 });
+        ReusableRoundedButton(buttonText: 'Register', colour: Colors.lightBlueAccent, onPressed: () async {
+
+          setState(() {
+            showSpinner = true;
           });
 
-          if (newUser != null)
-            {
-              Navigator.pushNamed(context, HomePage.id);
-            }
-        }
-        catch(e){
-          print(e);
-        }
-      },
+          try {
+            final dynamic newUser = await _auth.createUserWithEmailAndPassword(
+                email: email, password: password);
+
+            if (newUser != null) {
+                Navigator.pushNamed(context, HomePage.id);
+              }
+
+            setState(() {
+              showSpinner = false;
+            });
+
+            await  FirebaseFirestore.instance.collection('user').doc(newUser.uid).set({
+              'displayName': username,
+              'phoneNumber': phoneNumber,
+              'accountType': corporateType,
+            });
+
+
+          }
+          catch(e){
+            print(e);
+          }
+        },
+        ),
+
+
+
+
+
+      ],
+
+      )
+
       ),
-
-
-
-
-
-    ],
-
-    )
-
     ),
 
 
