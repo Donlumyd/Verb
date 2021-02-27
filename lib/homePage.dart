@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -42,8 +43,21 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
 
         appBar: AppBar(
-          title: Text('Homepage'),
           backgroundColor: Colors.blueAccent,
+
+          title: Text('Homepage'),
+
+          actions: [
+            IconButton(icon: Icon(Icons.menu), onPressed: (){
+
+            }),
+
+            IconButton(icon: Icon(Icons.search), onPressed: (){
+
+            }),
+          ],
+
+
         ),
 
         body: Column(
@@ -54,6 +68,7 @@ class _HomePageState extends State<HomePage> {
 
             Expanded(
                 child: ListView(
+                  scrollDirection: Axis.vertical,
 
                 ))
 

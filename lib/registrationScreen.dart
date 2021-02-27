@@ -137,7 +137,7 @@ setState((){selectedMenu = value;
           });
 
           try {
-            final dynamic newUser = await _auth.createUserWithEmailAndPassword(
+            final UserCredential newUser = await _auth.createUserWithEmailAndPassword(
                 email: email, password: password);
 
             if (newUser != null) {
@@ -148,7 +148,8 @@ setState((){selectedMenu = value;
               showSpinner = false;
             });
 
-            await  FirebaseFirestore.instance.collection('user').doc(newUser.uid).set({
+            User user = newUser.user;
+            await  FirebaseFirestore.instance.collection('user').doc(user.uid).set({
               'displayName': username,
               'phoneNumber': phoneNumber,
               'accountType': corporateType,
