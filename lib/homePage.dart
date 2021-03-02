@@ -1,4 +1,6 @@
+import 'dart:html';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -13,8 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   final _auth = FirebaseAuth.instance;
-   User loggedInUser;
-
+  User loggedInUser;
 
   @override
   void initState() {
@@ -22,8 +23,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  void getCurrentUser() async{
-
+  void getCurrentUser() async {
     try {
       final user = _auth.currentUser;
       if (user != null) {
@@ -34,11 +34,44 @@ class _HomePageState extends State<HomePage> {
     catch (e) {
       print(e);
     }
+  }
 
+
+  Future<String> showUsers() async {
+    Future<String>userList = [] as Future<String>;
+    final availableUsers = await FirebaseFirestore.instance.collection('users')
+        .get();
+
+    for (var availableUser in availableUsers.docs) {
+      final String userDisplayName = availableUser.get('displayName');
+      final String userAccountType = availableUser.get('accountType');
+
+      if (userAccountType != null) {
+        userList.then((value) => userDisplayName);
+      }
     }
+    return userList;
+  }
+  List<String> receivedList = [];
+  List<Text>finalText = [];
+
+ void changer () async {
+ receivedList = (await showUsers()) as List<String>;
+ }
+
+ void convertToText(){
+
+   for (var convertedText in receivedList){
+
+   Text userText = Text('$convertedText');
+   finalText.add(userText);
+   }
+ }
 
   @override
   Widget build(BuildContext context) {
+
+
 
     return Scaffold(
 
@@ -48,16 +81,58 @@ class _HomePageState extends State<HomePage> {
           title: Text('Homepage'),
 
           actions: [
-            IconButton(icon: Icon(Icons.menu), onPressed: (){
-
-            }),
-
-            IconButton(icon: Icon(Icons.search), onPressed: (){
+            IconButton(icon: Icon(Icons.search), onPressed: () {
 
             }),
           ],
+        ),
 
 
+        drawer: Drawer(
+
+          child: ListView(
+
+            children: [
+              new DrawerHeader(child: Text('Display Name'),
+                // add display picture to user
+              ),
+
+              ListTile(
+                title: Text('Profile',
+                    style: TextStyle(
+                        fontSize: 15
+                    )),
+                onTap: () {
+                  //set Profile
+
+                },
+              ),
+
+              ListTile(
+                title: Text('Entries',
+                    style: TextStyle(
+                        fontSize: 15
+                    )),
+                onTap: () {
+                  //set Profile
+
+                },
+              ),
+
+              ListTile(
+                title: Text('Logout',
+                    style: TextStyle(
+                        fontSize: 15
+                    )),
+                onTap: () {
+                  //set Profile
+
+                },
+              ),
+
+            ],
+
+          ),
         ),
 
         body: Column(
@@ -68,9 +143,12 @@ class _HomePageState extends State<HomePage> {
 
             Expanded(
                 child: ListView(
-                  scrollDirection: Axis.vertical,
+                    scrollDirection: Axis.vertical,
+                    children: finalText,
 
-                ))
+
+                )
+            )
 
           ],
 
@@ -78,7 +156,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  }
+}
+
 
 
 
