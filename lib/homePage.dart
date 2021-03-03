@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,43 +34,8 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-
-  Future<String> showUsers() async {
-    Future<String>userList = [] as Future<String>;
-    final availableUsers = await FirebaseFirestore.instance.collection('users')
-        .get();
-
-    for (var availableUser in availableUsers.docs) {
-      final String userDisplayName = availableUser.get('displayName');
-      final String userAccountType = availableUser.get('accountType');
-
-      if (userAccountType != null) {
-        userList.then((value) => userDisplayName);
-      }
-    }
-    return userList;
-  }
-  List<String> receivedList = [];
-  List<Text>finalText = [];
-
- void changer () async {
- receivedList = (await showUsers()) as List<String>;
- }
-
- void convertToText(){
-
-   for (var convertedText in receivedList){
-
-   Text userText = Text('$convertedText');
-   finalText.add(userText);
-   }
- }
-
   @override
   Widget build(BuildContext context) {
-
-
-
     return Scaffold(
 
         appBar: AppBar(
@@ -140,23 +103,49 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
 
           children: [
+            StreamBuilder <QuerySnapshot>(
+                stream: FirebaseFirestore.instance.collection('user').snapshots(),
+                builder: (context, snapshot){
+                  List<Text>profileWidgets = [];
 
-            Expanded(
-                child: ListView(
-                    scrollDirection: Axis.vertical,
-                    children: finalText,
+                  if (!snapshot.hasData)
+                  {
+                    return Center(
+                        child: CircularProgressIndicator(
+                          backgroundColor: Colors.blueAccent,
+                        )
+                    );
+                  }
+                  else {
+                    final profiles = snapshot.data.docs;
+                    for (var profile in profiles){
 
+                      final profileName = profile.get('displayName');
+                      final profileWidget = Text('$profileName');
+                      profileWidgets.add(profileWidget);
+                    }
 
-                )
+                  }
+                  return Expanded(
+                    child: ListView(
+                      children: profileWidgets,
+                    ),
+                  );
+
+                }
             )
-
           ],
 
         )
     );
   }
 
-}
+
+  
+  }
+
+
+
 
 
 
