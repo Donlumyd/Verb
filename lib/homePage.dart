@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:voxpopper/profilePage.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -66,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                         fontSize: 15
                     )),
                 onTap: () {
-                  //set Profile
+                  Navigator.pushNamed(context, ProfilePage.id);
 
                 },
               ),
@@ -106,7 +109,7 @@ class _HomePageState extends State<HomePage> {
             StreamBuilder <QuerySnapshot>(
                 stream: FirebaseFirestore.instance.collection('user').snapshots(),
                 builder: (context, snapshot){
-                  List<Text>profileWidgets = [];
+                  List<HomePageTiles>profileWidgets = [];
 
                   if (!snapshot.hasData)
                   {
@@ -121,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                     for (var profile in profiles){
 
                       final profileName = profile.get('displayName');
-                      final profileWidget = Text('$profileName');
+                      final profileWidget = HomePageTiles(profileName: profileName);
                       profileWidgets.add(profileWidget);
                     }
 
@@ -141,9 +144,41 @@ class _HomePageState extends State<HomePage> {
   }
 
 
-  
+
   }
 
+class HomePageTiles extends StatelessWidget {
+
+  final String profileName;
+
+ HomePageTiles({this.profileName});
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 0),
+child: DecoratedBox(
+  decoration: BoxDecoration(
+      border: Border.all(width:0.5, color: Colors.lightBlue),
+  ),
+
+  child:   Text('$profileName',
+    textAlign: TextAlign.center,
+    style: TextStyle(
+      fontSize: 30,
+      fontFamily: 'Sans serif'
+
+
+    )
+
+  ),
+),
+
+    );
+  }
+}
 
 
 
